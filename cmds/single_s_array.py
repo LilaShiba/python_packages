@@ -176,7 +176,7 @@ class DataRecorder:
 
 
 # 🚀 Main Execution
-class SensorDataRecorder:
+class SingleSArray:
     """Handles the full workflow of sensor data recording."""
     
     @staticmethod
@@ -217,4 +217,4 @@ class SensorDataRecorder:
 
 
 if __name__ == "__main__":
-    SensorDataRecorder.main()
+    SingleSArray.main()
