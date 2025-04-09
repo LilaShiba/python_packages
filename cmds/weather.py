@@ -16,7 +16,6 @@ WEATHER_EMOJIS = {
     "Smoke": "🔥🌫️", "Dust": "🌫️🏜️", "Sandstorm": "🏜️💨", "Ash": "🌋🌫️",
 }
 
-
 def get_emoji(description):
     """Match weather descriptions to magical emojis."""
     return next((emoji for key, emoji in WEATHER_EMOJIS.items() if key.lower() in description.lower()), "🌙🌌")
