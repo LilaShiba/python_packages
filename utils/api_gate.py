@@ -54,6 +54,7 @@ class GateAdmin:
 
     def _delay_sensor_reading(self, sensor_method):
         """Allow 10 seconds for sensors to stabilize before recording data."""
+        
         print(f"⏳ Waiting for 10 seconds for the sensor {sensor_method} to stabilize...")
         time.sleep(10)
         return sensor_method()
