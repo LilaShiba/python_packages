@@ -132,7 +132,6 @@ class SensorSuite:
 
                 time.sleep(1 / frequency)
 
-
 class SensorRecorder:
     def __init__(self):
         """Initializes the main application."""
@@ -153,6 +152,10 @@ class SensorRecorder:
         else:
             print("❌ Unable to start recording due to sensor initialization failure.")
 
+class Runner:
+    def __init__():
+        recorder = SensorRecorder()
+        recorder.start_recording()
 
 if __name__ == "__main__":
     recorder = SensorRecorder()

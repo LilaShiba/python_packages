@@ -9,7 +9,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 # Now you can import the modules from 'cmds' folder
 from cmds.pollen import Pollen
-from cmds.s_array import SArray
+from cmds.s_array import Runner
 from cmds.scan_network import ScanNetwork
 from cmds.send_txt import SendTxt
 from cmds.sensor_subprocess import SensorSubprocess
@@ -22,7 +22,7 @@ class GateAdmin:
     def __init__(self, log_file="api_calls_log.csv"):
         # Initialize each command as an instance of its respective class
         self.pollen = Pollen()
-        self.s_array = SArray()
+        self.s_array = Runner()
         self.scan_network = ScanNetwork()
         self.send_txt = SendTxt()
         self.sensor_subprocess = SensorSubprocess()
