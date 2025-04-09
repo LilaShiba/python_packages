@@ -67,17 +67,20 @@ def fetch_forecast(station):
     except Exception as e:
         print(f"❌ Error fetching forecast data: {e}")
 
-def main():
-    """Parse input and call weather functions."""
-    args = sys.argv[1:]
-    if not args:
-        print("Usage: weather [-future] STATION")
-        sys.exit(1)
+class Weather:
+    def __init__(self):
+        self.process_id = None
+    def main(self):
+        """Parse input and call weather functions."""
+        args = sys.argv[1:]
+        if not args:
+            print("Usage: weather [-future] STATION")
+            sys.exit(1)
 
-    future = "-future" in args
-    station = next((arg for arg in args if not arg.startswith("-")), "KJFK")
+        future = "-future" in args
+        station = next((arg for arg in args if not arg.startswith("-")), "KJFK")
 
-    fetch_forecast(station) if future else fetch_weather(station)
+        fetch_forecast(station) if future else fetch_weather(station)
 
 if __name__ == "__main__":
-    main()
+    Weather().main()
