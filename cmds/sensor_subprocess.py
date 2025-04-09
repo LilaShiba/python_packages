@@ -50,10 +50,13 @@ class RandomSensorRunner:
             print(f"Next run in {interval // 60} minutes.")
             time.sleep(interval)
 
-def main():
-    """Main function to initialize and start the random sensor runner."""
-    runner = RandomSensorRunner()
-    runner.start()
+class SensorSubprocess:
+    def __init__(self):
+        self.subprocess_number = None
+    def main(self):
+        """Main function to initialize and start the random sensor runner."""
+        runner = RandomSensorRunner()
+        runner.start()
 
 if __name__ == "__main__":
-    main()
+    SensorSubprocess().main()

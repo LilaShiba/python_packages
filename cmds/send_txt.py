@@ -37,15 +37,18 @@ class SMSNotifier:
         except requests.exceptions.RequestException as req_err:
             print(f"❌ Request error occurred: {req_err}")
     
-def main():
-    """Main function to send an SMS notification."""
-    api_key = 'your_sendinblue_api_key'
-    sender = 'your_sender_name'
-    recipient = 'your_phone_number'
+class SendTxt:
+    def __init__(self):
+        self.msg = None
+    def main(self):
+        """Main function to send an SMS notification."""
+        api_key = 'your_sendinblue_api_key'
+        sender = 'your_sender_name'
+        recipient = 'your_phone_number'
 
-    notifier = SMSNotifier(api_key, sender, recipient)
-    message = 'Your temperature is too high!'  # Example message
-    notifier.send_sms(message)
+        notifier = SMSNotifier(api_key, sender, recipient)
+        message = 'Your temperature is too high!'  # Example message
+        notifier.send_sms(message)
 
 if __name__ == "__main__":
-    main()
+    SendTxt().main()
