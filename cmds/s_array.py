@@ -153,7 +153,9 @@ class SensorRecorder:
             print("❌ Unable to start recording due to sensor initialization failure.")
 
 class Runner:
-    def __init__():
+    def __init__(self):
+        self.processid = None
+    def main(self):
         recorder = SensorRecorder()
         recorder.start_recording()
 
