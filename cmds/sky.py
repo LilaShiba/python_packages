@@ -2,7 +2,7 @@
 
 import requests
 
-class AsteroidObservations:
+class Sky:
     """Class for fetching and displaying asteroid observations and NHATS data with magical emojis."""
     
     # Define some magical Sailor Moon-themed emojis for asteroid observations
@@ -90,5 +90,5 @@ class AsteroidObservations:
 
 
 if __name__ == "__main__":
-    asteroid_observations = AsteroidObservations()
+    asteroid_observations = Sky()
     asteroid_observations.main()
