@@ -6,42 +6,40 @@ import json
 from dotenv import load_dotenv
 import os
 
-# Load environment variables from .env file
-load_dotenv()
-
-# Retrieve the Ambee API key from the environment variable
-API_KEY = os.getenv("POLLEN")  # Replace with your actual variable name in .env file
-if not API_KEY:
-    print("❌ API key not found. Please add 'POLLEN_API_KEY' in your .env file.")
-    sys.exit(1)
-
-GEO_URL = "https://nominatim.openstreetmap.org/search"
-POLLEN_URL = "https://api.ambeedata.com/latest/pollen/by-lat-lng"
-
-# Emoji dictionary for different types of allergens
-ALLERGEN_EMOJIS = {
-    "Grass": "🌱",  # Grass pollen
-    "Tree": "🌳",   # Tree pollen
-    "Weed": "🌾",   # Weed pollen
-}
 
 class Pollen:
-    def __init__(self, api_key):
-        self.api_key = api_key
+    def __init__(self):
+        # Load environment variables from .env file
+        load_dotenv()
 
-    def get_coordinates(self, city_name):
+        # Retrieve the Ambee API key from the environment variable
+        API_KEY = os.getenv("POLLEN")  # Ensure your actual variable name matches this
+        if not API_KEY:
+            print("❌ API key not found. Please add 'POLLEN' in your .env file.")
+            sys.exit(1)
+
+        self.GEO_URL = "https://nominatim.openstreetmap.org/search"
+        self.POLLEN_URL = "https://api.ambeedata.com/latest/pollen/by-lat-lng"
+
+        # Emoji dictionary for different types of allergens
+        self.ALLERGEN_EMOJIS = {
+            "Grass": "🌱",  # Grass pollen
+            "Tree": "🌳",   # Tree pollen
+            "Weed": "🌾",   # Weed pollen
+        }
+        self.api_key = API_KEY
+
+    def get_coordinates(self, city_name="New York"):
         """Convert city name to coordinates using Nominatim with required User-Agent."""
         headers = {
             "User-Agent": "cli-tools/1.0 (Lila James; pollen@local.test)"  # Adding User-Agent header to avoid rate-limiting issues
         }
         params = {"q": city_name, "format": "json"}
-        response = requests.get(GEO_URL, params=params, headers=headers)
-
         try:
+            response = requests.get(self.GEO_URL, params=params, headers=headers)
             results = response.json()
         except Exception as e:
             print(f"❌ Failed to decode response from geocoder: {e}")
-            print(f"↪ Response content: {response.text}")
             return None, None
 
         if not results:
@@ -54,11 +52,15 @@ class Pollen:
         """Fetch pollen data from Ambee API."""
         headers = {"x-api-key": self.api_key}
         params = {"lat": lat, "lng": lng}
-        response = requests.get(POLLEN_URL, headers=headers, params=params)
-        if response.status_code == 200:
-            return response.json()
-        else:
-            print(f"❌ Error fetching pollen data: {response.status_code}")
+        try:
+            response = requests.get(self.POLLEN_URL, headers=headers, params=params)
+            if response.status_code == 200:
+                return response.json()
+            else:
+                print(f"❌ Error fetching pollen data: {response.status_code}")
+                return {}
+        except Exception as e:
+            print(f"❌ Failed to fetch pollen data: {e}")
             return {}
 
     def display_pollen_data(self, data, lat, lon):
@@ -88,16 +90,16 @@ class Pollen:
                 sorted_allergens = sorted(allergens.items(), key=lambda x: x[1], reverse=True)[:2]
                 
                 for allergen, count in sorted_allergens:
-                    emoji = ALLERGEN_EMOJIS.get(category, "❓")
+                    emoji = self.ALLERGEN_EMOJIS.get(category, "❓")
                     risk_level = risk.get(f"{category.lower()}_pollen", "N/A")
                     print(f"   {emoji} {allergen}: {count} grains/m³ (Risk: {risk_level})")
             
             else:
-                emoji = ALLERGEN_EMOJIS.get(category, "❓")
+                emoji = self.ALLERGEN_EMOJIS.get(category, "❓")
                 risk_level = risk.get(f"{category.lower()}_pollen", "N/A")
                 print(f"   {emoji} {category}: {allergens} grains/m³ (Risk: {risk_level})")
 
-    def run(self, city):
+    def run(self, city="New York"):
         lat, lng = self.get_coordinates(city)
         if lat is not None and lng is not None:
             data = self.fetch_pollen_data(lat, lng)
@@ -105,13 +107,13 @@ class Pollen:
 
 def main():
     if len(sys.argv) < 2:
-        print("Usage: pollen <City Name>")
-        return
+        print("Usage: pollen <City Name> (defaults to New York if no city is provided)")
+        city = "New York"
+    else:
+        city = " ".join(sys.argv[1:])
 
-    city = " ".join(sys.argv[1:])
-    
     # Instantiate the Pollen class and run the process
-    pollen = Pollen(API_KEY)
+    pollen = Pollen()
     pollen.run(city)
 
 if __name__ == "__main__":
