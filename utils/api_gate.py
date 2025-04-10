@@ -13,7 +13,7 @@ from cmds.s_array import Runner
 from cmds.scan_network import ScanNetwork
 from cmds.send_txt import SendTxt
 from cmds.sensor_subprocess import SensorSubprocess
-from cmds.single_s_array import SensorDataRecorder
+from cmds.single_s_array import SensorDataRecorder  # Correct import statement
 from cmds.weather import Weather
 from cmds.sky import Sky
 
@@ -25,7 +25,7 @@ class GateAdmin:
         self.scan_network = ScanNetwork()
         self.send_txt = SendTxt()
         self.sensor_subprocess = SensorSubprocess()
-        self.single_s_array = SensorDataRecorder()
+        self.single_s_array = SensorDataRecorder()  # Create instance of SensorDataRecorder
         self.weather = Weather()
         self.sky = Sky()
         self.log_file = log_file
@@ -61,22 +61,17 @@ class GateAdmin:
         """Run all the commands, ensuring sensors are delayed before reading data."""
         tasks = [
             ("Pollen", self.pollen.main, False),
-            # ("SArray", self.s_array.main, False),
-            ("Weather", lambda: self.weather.main("KNYC"), False),
-
-            # ("SensorSubprocess", lambda: self._delay_sensor_reading(self.sensor_subprocess.main), True),
+            ("Weather", self.weather.main, False),
             ("SingleSArray", lambda: self._delay_sensor_reading(self.single_s_array.main), True),
             ("Sky", self.sky.main, False),
             ("ScanNetwork", self.scan_network.main, False),
-            # ("SendTxt", self.send_txt.main, False),
         ]
 
         for name, method, requires_delay in tasks:
-            print(f"🚀 Starting task: {name}")
             self._log_api_call(name, "Started", "N/A")
             try:
                 response = method() if not requires_delay else method()
-                print(f"✅ {name} response: {response}")
+                print(f"✅ {name} response:", response)
                 self._log_api_call(name, "Completed", response)
             except Exception as e:
                 error_message = f"Error in {name}: {e}"
