@@ -147,7 +147,7 @@ class SensorRecorder:
         if self.sensor_suite:
             csv_path = f"data/sensor_data_{datetime.now().strftime('%Y-%m-%dT%H:%M')}.csv"
             print("Starting data recording...")
-            self.sensor_suite.record_data(csv_path, duration=360, frequency=1)
+            self.sensor_suite.record_data(csv_path, duration=20, frequency=1)
             print(f"✅ Data saved to {csv_path}")
         else:
             print("❌ Unable to start recording due to sensor initialization failure.")
