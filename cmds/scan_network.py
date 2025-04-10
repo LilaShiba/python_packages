@@ -42,11 +42,11 @@ class NetworkLogger:
         print("🌟 Starting network logging...")
 
         try:
-            while True:
-                data = self.get_network_scan()
-                if data:
-                    self.log_entry(data)
-                time.sleep(self.interval)  # Wait for the specified interval
+            
+            data = self.get_network_scan()
+            if data:
+                self.log_entry(data)
+                return data
         except KeyboardInterrupt:
             print("\n⏹️ Logging stopped manually.")
 

@@ -98,7 +98,8 @@ class Pollen:
                 emoji = self.ALLERGEN_EMOJIS.get(category, "❓")
                 risk_level = risk.get(f"{category.lower()}_pollen", "N/A")
                 print(f"   {emoji} {category}: {allergens} grains/m³ (Risk: {risk_level})")
-
+        return data
+    
     def run(self, city="New York"):
         lat, lng = self.get_coordinates(city)
         if lat is not None and lng is not None:
