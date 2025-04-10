@@ -56,7 +56,6 @@ class GateAdmin:
         print(f"⏳ Waiting 10 seconds for sensor '{sensor_method.__name__}' to stabilize...")
         time.sleep(10)
         return sensor_method()
-
     def run(self):
         """Run all the commands, ensuring sensors are delayed before reading data."""
         tasks = [
@@ -80,29 +79,6 @@ class GateAdmin:
                 error_message = f"Error in {name}: {e}"
                 print(f"❌ {error_message}")
                 self._log_api_call(name, "Failed", error_message)
-
-            """Run all the commands, ensuring sensors are delayed before reading data."""
-            tasks = [
-                ("Pollen", self.pollen.main, False),
-                # ("SArray", self.s_array.main, False),
-                ("Weather", self.weather.main, False),
-                # ("SensorSubprocess", lambda: self._delay_sensor_reading(self.sensor_subprocess.main), True),
-                ("SingleSArray", lambda: self._delay_sensor_reading(self.SensorDataRecorder.main), True),
-                ("Sky", self.sky.main, False),
-                ("ScanNetwork", self.scan_network.main, False),
-                # ("SendTxt", self.send_txt.main, False),
-            ]
-
-            for name, method, requires_delay in tasks:
-                self._log_api_call(name, "Started", "N/A")
-                try:
-                    response = method() if not requires_delay else method()
-                    print(f"✅ {name} response:", response)
-                    self._log_api_call(name, "Completed", response)
-                except Exception as e:
-                    error_message = f"Error in {name}: {e}"
-                    print(f"❌ {error_message}")
-                    self._log_api_call(name, "Failed", error_message)
 
     def start(self):
         """Start the GateAdmin system."""
