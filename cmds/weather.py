@@ -72,7 +72,7 @@ class Weather:
         self.process_id = None
     def main(self):
         """Parse input and call weather functions."""
-        args = sys.argv[1:]
+        args = sys.argv[1:] if sys.argv else "KJFK"
         if not args:
             print("Usage: weather [-future] STATION")
             sys.exit(1)

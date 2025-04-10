@@ -62,7 +62,8 @@ class GateAdmin:
         tasks = [
             ("Pollen", self.pollen.main, False),
             # ("SArray", self.s_array.main, False),
-            ("Weather", self.weather.main, False),
+            ("Weather", lambda: self.weather.main("KNYC"), False),
+
             # ("SensorSubprocess", lambda: self._delay_sensor_reading(self.sensor_subprocess.main), True),
             ("SingleSArray", lambda: self._delay_sensor_reading(self.single_s_array.main), True),
             ("Sky", self.sky.main, False),
