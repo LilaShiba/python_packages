@@ -21,6 +21,12 @@ class Sky:
 
     def get_asteroid_emoji(self, magnitude, velocity):
         """Assign a Sailor Moon emoji based on brightness and speed."""
+        # Ensure magnitude is numeric (convert to float if possible)
+        try:
+            magnitude = float(magnitude)
+        except (ValueError, TypeError):
+            magnitude = None
+
         if magnitude is not None and magnitude < 15:
             emoji = self.ASTEROID_EMOJIS["Bright"]
         elif magnitude is not None and magnitude > 20:
@@ -28,6 +34,12 @@ class Sky:
         else:
             emoji = self.ASTEROID_EMOJIS["Observed"]
 
+        # Handle velocity
+        try:
+            velocity = float(velocity)
+        except (ValueError, TypeError):
+            velocity = None
+        
         if velocity is not None and velocity > 10:
             emoji += " " + self.ASTEROID_EMOJIS["Fast"]
         elif velocity is not None and velocity < 1:
@@ -38,11 +50,13 @@ class Sky:
     def fetch_nhats_data(self):
         """Fetch and display NHATS mission candidates."""
         try:
+            print(f"🌍 Fetching NHATS data from: {self.url}")
             response = requests.get(self.url)
             response.raise_for_status()
             data = response.json()
 
             if "data" in data:
+                print(f"📡 Successfully fetched {len(data['data'])} NHATS missions.")
                 return data["data"][:5]  # Limit to 5 results
             else:
                 print("🌑 No NHATS mission candidates found!")
@@ -52,11 +66,17 @@ class Sky:
             print(f"❌ HTTP error: {http_err}")
         except requests.exceptions.RequestException as req_err:
             print(f"❌ Request error: {req_err}")
+        except Exception as e:
+            print(f"❗ Unexpected error: {e}")
         
         return []
 
     def print_asteroid_observations(self, observations, top_n=10):
         """Print the latest asteroid observations in a magical format."""
+        if not observations:
+            print("🌑 No observations available to display.")
+            return
+
         print("\n🌙✨ Latest Asteroid Observations ✨🌙\n")
         
         for i, obs in enumerate(observations[:top_n], start=1):
@@ -81,13 +101,14 @@ class Sky:
 
     def main(self):
         """Main function to fetch and display asteroid observations and NHATS data."""
+        print("🌍 Starting NHATS data fetch...")
         nhats_missions = self.fetch_nhats_data()
 
         if nhats_missions:
+            print("🚀 Displaying observations:")
             self.print_asteroid_observations(nhats_missions)
         else:
             print("🌑 No new NHATS mission candidates available.")
-
 
 if __name__ == "__main__":
     asteroid_observations = Sky()

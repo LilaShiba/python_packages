@@ -48,7 +48,7 @@ def fetch_weather(station):
     except Exception as e:
         print(f"❌ Error fetching weather data: {e}")
 
-def fetch_forecast(station):
+def fetch_forecast(station='KNYC'):
     """Fetch and display 3-day forecast."""
     try:
         # Get coordinates
@@ -68,19 +68,13 @@ def fetch_forecast(station):
         print(f"❌ Error fetching forecast data: {e}")
 
 class Weather:
+
     def __init__(self):
         self.process_id = None
+        self.station='KNYC'
     def main(self):
         """Parse input and call weather functions."""
-        args = sys.argv[1:] if len(sys.argv) > 2 else "KJFK"
-        if not args:
-            print("Usage: weather [-future] STATION")
-            sys.exit(1)
-
-        future = "-future" in args
-        station = next((arg for arg in args if not arg.startswith("-")), "KJFK")
-
-        fetch_forecast(station) if future else fetch_weather(station)
+        fetch_forecast(self.station)
 
 if __name__ == "__main__":
     Weather().main()

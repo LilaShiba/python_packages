@@ -106,7 +106,7 @@ class Pollen:
             self.display_pollen_data(data, lat, lng)
 
     def main(self):
-        if len(sys.argv) < 2:
+        if len(sys.argv) <= 3:
             print("Usage: pollen <City Name> (defaults to New York if no city is provided)")
             city = "New York"
         else:
