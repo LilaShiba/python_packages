@@ -62,15 +62,22 @@ class GateAdmin:
         tasks = [
             ("Pollen", self.pollen.main, False),
             ("Weather", self.weather.main, False),
-            ("SingleSArray", self.single_s_array.main, False),
+            ("SingleSArray", self.single_s_array.main, True),  # Delay added for this task
             ("Sky", self.sky.main, False),
             ("ScanNetwork", self.scan_network.main, False),
         ]
 
         for name, method, requires_delay in tasks:
+            print(f"🚀 Starting task: {name}")
             self._log_api_call(name, "Started", "N/A")
             try:
-                response = method() if not requires_delay else method()
+                # Check if delay is needed
+                if requires_delay:
+                    print(f"⏳ Delaying for {name}...")
+                    response = self._delay_sensor_reading(method)
+                else:
+                    response = method()
+                
                 print(f"✅ {name} response:", response)
                 self._log_api_call(name, "Completed", response)
             except Exception as e:
