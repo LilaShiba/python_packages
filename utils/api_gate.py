@@ -25,7 +25,7 @@ class GateAdmin:
         self.scan_network = ScanNetwork()
         self.send_txt = SendTxt()
         self.sensor_subprocess = SensorSubprocess()
-        self.single_s_array = SensorDataRecorder()  # Create instance of SensorDataRecorder
+        self.SensorDataRecorder = SensorDataRecorder()  # Create instance of SensorDataRecorder
         self.weather = Weather()
         self.sky = Sky()
         self.log_file = log_file
@@ -62,7 +62,7 @@ class GateAdmin:
         tasks = [
             ("Pollen", self.pollen.main, False),
             ("Weather", self.weather.main, False),
-            ("SingleSArray", self.single_s_array.main, True),  # Delay added for this task
+            ("SensorDataRecorder", self.SensorDataRecorder.main, False),  # Delay added for this task
             ("Sky", self.sky.main, False),
             ("ScanNetwork", self.scan_network.main, False),
         ]
