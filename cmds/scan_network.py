@@ -56,7 +56,7 @@ class ScanNetwork:
 
     def main(self):
         """Main function to start the network logging process."""
-        logger = NetworkLogger(interval=10)  # Default interval of 1 hour
+        logger = NetworkLogger(interval=1)  # Default interval of 1 hour
         logger.start_logging()
 
 if __name__ == "__main__":

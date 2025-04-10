@@ -114,7 +114,7 @@ class Pollen:
 
         # Instantiate the Pollen class and run the process
         pollen = Pollen()
-        pollen.run(city)
+        return pollen.run(city)
 
 if __name__ == "__main__":
     Pollen().main()
