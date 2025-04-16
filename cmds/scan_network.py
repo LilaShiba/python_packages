@@ -3,6 +3,7 @@ import datetime
 import json
 import subprocess
 
+
 class NetworkLogger:
     """Class for performing network scans and logging the results to a file."""
 
@@ -16,7 +17,8 @@ class NetworkLogger:
         """Run a network scan using arp-scan and return the output."""
         try:
             # Run the arp-scan command and capture the output
-            scan_output = subprocess.check_output(["sudo", "arp-scan", "--localnet"], stderr=subprocess.STDOUT)
+            scan_output = subprocess.check_output(
+                ["sudo", "arp-scan", "--localnet"], stderr=subprocess.STDOUT)
             scan_output = scan_output.decode("utf-8")  # Decode bytes to string
             return scan_output
 
@@ -42,7 +44,7 @@ class NetworkLogger:
         print("🌟 Starting network logging...")
 
         try:
-            
+
             data = self.get_network_scan()
             if data:
                 self.log_entry(data)
@@ -50,14 +52,12 @@ class NetworkLogger:
         except KeyboardInterrupt:
             print("\n⏹️ Logging stopped manually.")
 
-class ScanNetwork:
-    def __init__(self):
-        pass
 
-    def main(self):
-        """Main function to start the network logging process."""
-        logger = NetworkLogger(interval=1)  # Default interval of 1 hour
-        logger.start_logging()
+def main():
+    """Main function to start the network logging process."""
+    logger = NetworkLogger(interval=1)  # Default interval of 1 hour
+    logger.start_logging()
+
 
 if __name__ == "__main__":
     ScanNetwork().main()

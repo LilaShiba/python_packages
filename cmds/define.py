@@ -4,7 +4,7 @@ import os
 from dotenv import load_dotenv
 
 # Load API credentials from .env file
-load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), '.env'))
+load_dotenv()
 
 API_KEY = os.getenv('DICT_API')
 if not API_KEY:
@@ -12,6 +12,7 @@ if not API_KEY:
     sys.exit(1)
 
 MW_API_URL = "https://www.dictionaryapi.com/api/v3/references/collegiate/json/"
+
 
 def get_definition(word):
     url = f"{MW_API_URL}{word.lower()}?key={API_KEY}"
@@ -74,13 +75,14 @@ def get_definition(word):
                                     for dt in dt_list:
                                         if isinstance(dt, list) and dt[0] == "text":
                                             definitions.append(dt[1])
-    
+
     if definitions:
         print("Definitions:")
         for i, d in enumerate(definitions, start=1):
             print(f"{i}. {d}")
     else:
         print("No definitions found.")
+
 
 def main():
     if len(sys.argv) > 1:
@@ -89,6 +91,7 @@ def main():
     else:
         print("Provide a word to define.")
         sys.exit(1)
+
 
 if __name__ == "__main__":
     main()

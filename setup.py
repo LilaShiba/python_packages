@@ -18,6 +18,7 @@ setup(
             'sensors = cmds.s_array:main',
             'lights = cmds.lights:main',
             'pollen = cmds.pollen:main',
+            'scan = cmds.scan_network:main'
         ],
     },
 )
