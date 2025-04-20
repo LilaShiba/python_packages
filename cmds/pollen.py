@@ -105,17 +105,21 @@ class Pollen:
         if lat is not None and lng is not None:
             data = self.fetch_pollen_data(lat, lng)
             self.display_pollen_data(data, lat, lng)
+    
+def main():
+    if len(sys.argv) <= 1:
+        print("Usage: pollen <City Name> (defaults to New York if no city is provided)")
+        city = "New York"
+    else:
+        city = " ".join(sys.argv[1:])
 
-    def main(self):
-        if len(sys.argv) <= 3:
-            print("Usage: pollen <City Name> (defaults to New York if no city is provided)")
-            city = "New York"
-        else:
-            city = " ".join(sys.argv[1:])
-
-        # Instantiate the Pollen class and run the process
-        pollen = Pollen()
-        return pollen.run(city)
+    pollen = Pollen()
+    return pollen.run(city)
 
 if __name__ == "__main__":
-    Pollen().main()
+    main()
+
+
+if __name__ == "__main__":
+    p = Pollen()
+    p.main()

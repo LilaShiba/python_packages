@@ -53,7 +53,8 @@ class NetworkLogger:
 class ScanNetwork:
     def __init__(self):
         pass
-
+    
+    @staticmethod
     def main(self):
         """Main function to start the network logging process."""
         logger = NetworkLogger(interval=1)  # Default interval of 1 hour

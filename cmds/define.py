@@ -4,7 +4,7 @@ import os
 from dotenv import load_dotenv
 
 # Load API credentials from .env file
-load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), '.env'))
+load_dotenv()
 
 API_KEY = os.getenv('DICT_API')
 if not API_KEY:

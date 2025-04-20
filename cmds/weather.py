@@ -67,14 +67,13 @@ def fetch_forecast(station='KNYC'):
     except Exception as e:
         print(f"❌ Error fetching forecast data: {e}")
 
-class Weather:
 
-    def __init__(self):
-        self.process_id = None
-        self.station='KNYC'
-    def main(self):
-        """Parse input and call weather functions."""
-        fetch_forecast(self.station)
-
+def main():
+    """Parse input and call weather functions."""
+    if len(sys.argv) > 1:
+        word = sys.argv[1]
+        fetch_weather(word)
+    else:
+        fetch_forecast("KNYC")
 if __name__ == "__main__":
-    Weather().main()
+    main()

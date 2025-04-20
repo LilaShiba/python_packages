@@ -99,16 +99,17 @@ class Sky:
             print(f"   🌠 Trajectory Information: {n_via_traj} possible trajectory points")
             print("   ───────────────────────────")
 
-    def main(self):
-        """Main function to fetch and display asteroid observations and NHATS data."""
-        print("🌍 Starting NHATS data fetch...")
-        nhats_missions = self.fetch_nhats_data()
+def main():
+    """Main function to fetch and display asteroid observations and NHATS data."""
+    print("🌍 Starting NHATS data fetch...")
+    mission = Sky()
+    nhats_missions = mission.fetch_nhats_data()
 
-        if nhats_missions:
-            print("🚀 Displaying observations:")
-            self.print_asteroid_observations(nhats_missions)
-        else:
-            print("🌑 No new NHATS mission candidates available.")
+    if nhats_missions:
+        print("🚀 Displaying observations:")
+        mission.print_asteroid_observations(nhats_missions)
+    else:
+        print("🌑 No new NHATS mission candidates available.")
 
 if __name__ == "__main__":
     asteroid_observations = Sky()
