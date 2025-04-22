@@ -53,6 +53,8 @@ class RandomSensorRunner:
 class SensorSubprocess:
     def __init__(self):
         self.subprocess_number = None
+    
+    @staticmethod
     def main(self):
         """Main function to initialize and start the random sensor runner."""
         runner = RandomSensorRunner()

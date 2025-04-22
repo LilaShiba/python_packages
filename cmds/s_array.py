@@ -159,6 +159,11 @@ class Runner:
         recorder = SensorRecorder()
         recorder.start_recording()
 
+def main():
+        recorder = SensorRecorder()
+        recorder.start_recording()
+
+
 if __name__ == "__main__":
     recorder = SensorRecorder()
     recorder.start_recording()
