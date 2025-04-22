@@ -216,5 +216,9 @@ class SensorDataRecorder:
         return parser.parse_args()
 
 
+def main():
+    data = SensorDataRecorder()
+    return data.main()
+
 if __name__ == "__main__":
     SensorDataRecorder.main()

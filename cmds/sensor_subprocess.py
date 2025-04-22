@@ -58,5 +58,9 @@ class SensorSubprocess:
         runner = RandomSensorRunner()
         runner.start()
 
+
+def main():
+    data = SensorSubprocess()
+    return data.main()
 if __name__ == "__main__":
     SensorSubprocess().main()
