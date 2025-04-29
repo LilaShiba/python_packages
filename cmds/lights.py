@@ -63,6 +63,7 @@ def main():
 
     devices = get_devices()
     for device in devices:
+        print(device)
         control_device(device, args.state)
 
 

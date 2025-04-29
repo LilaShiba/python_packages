@@ -79,7 +79,6 @@ def fetch_forecast(station='KNYC'):
     except Exception as e:
         print(f"❌ Error fetching forecast data: {e}")
 
-<<<<<<< HEAD
 
 def main():
     if len(sys.argv) > 1:
@@ -92,8 +91,6 @@ def main():
         # Default behavior
         fetch_weather('KNYC')
 
-=======
->>>>>>> 17552b2938b5e6e811d62dd7d6073ae809c202e1
 
 def main():
     """Parse input and call weather functions."""

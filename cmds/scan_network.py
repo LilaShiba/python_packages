@@ -52,14 +52,6 @@ class NetworkLogger:
         except KeyboardInterrupt:
             print("\n⏹️ Logging stopped manually.")
 
-<<<<<<< HEAD
-
-def main():
-    """Main function to start the network logging process."""
-    logger = NetworkLogger(interval=1)  # Default interval of 1 hour
-    logger.start_logging()
-
-=======
 class ScanNetwork:
     def __init__(self):
         pass
@@ -69,7 +61,6 @@ class ScanNetwork:
         """Main function to start the network logging process."""
         logger = NetworkLogger(interval=1)  # Default interval of 1 hour
         logger.start_logging()
->>>>>>> 17552b2938b5e6e811d62dd7d6073ae809c202e1
 
 if __name__ == "__main__":
     ScanNetwork().main()
