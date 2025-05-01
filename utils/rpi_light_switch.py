@@ -3,6 +3,7 @@ import time
 import board
 import busio
 import requests
+import random
 from typing import Dict, List, Optional
 from dotenv import load_dotenv
 from adafruit_neotrellis.neotrellis import NeoTrellis
@@ -68,7 +69,7 @@ def clear_all_leds() -> None:
 
 def update_led(index: int, is_on: bool) -> None:
     """Change LED color based on light state."""
-    trellis.pixels[index] = (0, 255, 0) if is_on else (0, 0, 0)
+    trellis.pixels[index] = (random.randint(0,255), random.randint(0,255), random.randint(0,255)) if is_on else (0, 0, 0)
 
 def get_devices() -> List[Dict]:
     """Fetch the list of devices from the Govee API."""

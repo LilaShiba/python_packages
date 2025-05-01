@@ -16,7 +16,6 @@ import adafruit_bme680
 import adafruit_gps
 
 # Constants
-I2C_FREQUENCY = 1  # Hz
 MAX_RETRIES = 5
 RETRY_DELAY = 0.5
 
