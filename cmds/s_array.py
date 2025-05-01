@@ -135,7 +135,7 @@ class SensorRecorder:
     def __init__(self):
         """Initializes the main application."""
         try:
-            self.i2c = busio.I2C(board.SCL, board.SDA, frequency=I2C_FREQUENCY)
+            self.i2c = busio.I2C(board.SCL, board.SDA)
             self.sensor_suite = SensorSuite(self.i2c)
         except Exception as e:
             print(f"🔥 Error initializing: {e}")
