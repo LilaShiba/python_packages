@@ -46,7 +46,7 @@ def get_top_risk_asteroids(data, top_n=5):
     
     # Sort: highest probability first, then earliest risk year
     asteroids.sort(
-        key=lambda x: (-x["impact_probability"], x["earliest_year"])
+        key=lambda x: (-x["impact_probability"])
     )
     return asteroids[:top_n]
 
