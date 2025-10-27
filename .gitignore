@@ -5,6 +5,7 @@
 dsfile
 
 # Ignore other common files
+*.cache
 *.json
 *.txt
 *.log

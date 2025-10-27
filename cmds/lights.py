@@ -35,7 +35,6 @@ def get_devices(refresh=False):
     """Retrieve devices from cache or API."""
     CACHE_FILE.parent.mkdir(parents=True, exist_ok=True)
 
-    # Load from cache if it exists and not refreshing
     if CACHE_FILE.exists() and not refresh:
         try:
             with open(CACHE_FILE, "r") as f:
@@ -43,7 +42,7 @@ def get_devices(refresh=False):
                 if devices:
                     return devices
         except json.JSONDecodeError:
-            pass  # Fall through to refresh
+            pass  # Corrupt cache, refetch
 
     print("🔄 Fetching devices from Govee API...")
     response = requests.get(f"{BASE_URL}/devices", headers=HEADERS)
@@ -56,6 +55,24 @@ def get_devices(refresh=False):
     print(f"⚠️ Error retrieving devices: {response.status_code}")
     print(response.text)
     return []
+
+
+def print_device_table(devices):
+    """Pretty-print a table of devices."""
+    if not devices:
+        print("No devices found in cache.")
+        return
+
+    print("\n📋 Govee Devices")
+    print("=" * 60)
+    print(f"{'Name':25} {'Model':15} {'Device ID'}")
+    print("-" * 60)
+    for d in devices:
+        name = d.get("deviceName", "unknown")[:25]
+        model = d.get("model", "-")[:15]
+        device_id = d.get("device", "-")
+        print(f"{name:25} {model:15} {device_id}")
+    print("=" * 60)
 
 
 def control_device(device, action, effect=None):
@@ -95,9 +112,15 @@ def main():
     parser.add_argument("-b", "--brightness", type=int, help="Set brightness (0–100)")
     parser.add_argument("-d", "--device", help="Control a specific device by name")
     parser.add_argument("--refresh", action="store_true", help="Refresh device list from Govee API")
+    parser.add_argument("--list", action="store_true", help="List all cached devices")
     args = parser.parse_args()
 
     devices = get_devices(refresh=args.refresh)
+
+    if args.list:
+        print_device_table(devices)
+        return
+
     if not devices:
         print("No devices found.")
         return
