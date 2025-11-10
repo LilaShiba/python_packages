@@ -16,9 +16,9 @@ Each command lives in its own module under `cmds/`, while shared functionality (
 | Command | Description |
 |----------|--------------|
 | `wut` | Dictionary and internal command reference utilities. 🐾 |
-| `neo` | NASA Near-Earth Object (NEO) data retrieval. ✨ |
+| `weather` | NOAA weather updates & predictions ✨ |
 | `sky` | NASA astronomical object feed and space event info. 🌟 |
-| `light` | Govee smart light controller with preset themes. 🧙‍♀️ |
+| `lights` | Govee smart light controller with preset themes. 🧙‍♀️ |
 | `scan` | Local network IP discovery and mapping tool. 🐕 |
 | `sensors` | Tricorder-style input manager for connected sensors. 🧙‍♀️ |
 
