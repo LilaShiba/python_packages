@@ -32,7 +32,7 @@ HEADERS: Dict[str, str] = {
 # ──────────────────────────────────────────────────────────────
 COLOR_PRESETS: Dict[str, Dict[str, Any]] = {
     # Core tones
-    "warm": {"r": 255, "g": 170, "b": 0, "effect": None},
+    "warm": {"r": 255, "g": 244, "b": 214, "effect": None},
     "cool": {"r": 0, "g": 255, "b": 255, "effect": None},
     "red": {"r": 255, "g": 0, "b": 0, "effect": None},
     "green": {"r": 0, "g": 255, "b": 0, "effect": None},
@@ -52,6 +52,23 @@ COLOR_PRESETS: Dict[str, Dict[str, Any]] = {
     "cocoa": {"r": 120, "g": 72, "b": 50, "effect": None},
     "lavender": {"r": 200, "g": 170, "b": 255, "effect": "fade"},
     "starlight": {"r": 200, "g": 220, "b": 255, "effect": "sparkle"},
+
+    # 🌞 Natural lighting - WARMEST variants
+    "sunrise": {"r": 255, "g": 200, "b": 140, "effect": "glow"},
+    "morning": {"r": 255, "g": 210, "b": 160, "effect": "glow"},
+    "daylight": {"r": 255, "g": 230, "b": 180, "effect": None},
+    "golden_hour": {"r": 255, "g": 190, "b": 120, "effect": "warmth"},
+    "sunset": {"r": 255, "g": 160, "b": 90, "effect": "fade"},
+    "afternoon": {"r": 255, "g": 225, "b": 170, "effect": None},
+    "overcast": {"r": 245, "g": 210, "b": 180, "effect": "soft"},
+
+
+    # 😎 Cool & happy vibes
+    "sky_blue": {"r": 135, "g": 206, "b": 235, "effect": "sparkle"},
+    "mint": {"r": 152, "g": 255, "b": 152, "effect": "pulse"},
+    "sunshine": {"r": 255, "g": 245, "b": 160, "effect": "glow"},
+    "bubblegum": {"r": 255, "g": 182, "b": 193, "effect": "bounce"},
+    "lemon": {"r": 255, "g": 250, "b": 150, "effect": "flash"},
 }
 
 # ──────────────────────────────────────────────────────────────
