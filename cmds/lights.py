@@ -66,8 +66,8 @@ COLOR_PRESETS: Dict[str, Dict[str, Any]] = {
     # 😎 Cool & happy vibes
     "sky_blue": {"r": 135, "g": 206, "b": 235, "effect": "sparkle"},
     "mint": {"r": 152, "g": 255, "b": 152, "effect": "pulse"},
-    "sunshine": {"r": 255, "g": 245, "b": 160, "effect": "glow"},
-    "bubblegum": {"r": 255, "g": 182, "b": 193, "effect": "bounce"},
+    "sunshine": {"r": 239, "g": 197, "b": 118},  
+    "shiba": {"r": 255, "g": 202, "b": 123},
     "lemon": {"r": 255, "g": 250, "b": 150, "effect": "flash"},
 }
 

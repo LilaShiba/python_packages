@@ -70,16 +70,16 @@ GOVEE_API_KEY=<your-api-key>
 
 <pre><code>
 # List all cached devices
-python -m cmds.lights --list
+python -m lights --list
 
 # Turn lights on
-python -m cmds.lights --state on
+python -m lights --state on
 
 # Set brightness to 75%
-python -m cmds.lights --brightness 75
+python -m lights --brightness 75
 
 # Activate a color preset
-python -m cmds.lights --color witch
+python -m lights --color witch
 </code></pre>
 
 ---
