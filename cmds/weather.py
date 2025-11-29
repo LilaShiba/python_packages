@@ -80,16 +80,7 @@ def fetch_forecast(station='KNYC'):
         print(f"❌ Error fetching forecast data: {e}")
 
 
-def main():
-    if len(sys.argv) > 1:
-        arg = sys.argv[1]
-        if arg == "-future":
-            fetch_forecast()
-        else:
-            fetch_weather(arg)
-    else:
-        # Default behavior
-        fetch_weather('KNYC')
+
 
 
 def main():
