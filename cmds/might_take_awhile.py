@@ -3,7 +3,7 @@
 import os
 import sys
 import datetime
-from typing import List, Dict, Tuple, Optional
+from typing import List, Dict, Tuple, Optional, Union
 import requests
 from dotenv import load_dotenv
 from google.transit import gtfs_realtime_pb2
@@ -28,10 +28,12 @@ FEED_MAP: Dict[str, str] = {
 # -----------------------------
 # LOCATION GROUPS
 # -----------------------------
-LOCATION_GROUPS: Dict[str, List[str] or str] = {
-    "smith": ["F22", "G35"],    # Smith–9th Street
-    "bergen": ["F20", "G33"],   # Bergen St
-    "court": ["233", "234"],    # Court St 2/3
+
+LOCATION_GROUPS: Dict[str, Union[List[str], str]] = {
+    "smith": ["F22", "G35"],       # Smith–9th Street
+    "bergen": ["F20", "G33"],      # Bergen St
+    "court": ["233", "234"],       # Court St 2/3
+    "atlantic": ["A30", "B26", "D45", "N22", "Q15", "R11"],  # Atlantic Av–Barclays Center
     "b63": "bus",
     "b65": "bus",
 }
@@ -55,20 +57,19 @@ class NYCTransit:
 
         feed_url: str = self.select_feed(station_prefix)
         headers = {"x-api-key": self.subway_key}
+        
 
         r = requests.get(feed_url, headers=headers)
         feed = gtfs_realtime_pb2.FeedMessage()
         feed.ParseFromString(r.content)
-
         arrivals: List[Dict] = []
 
         for entity in feed.entity:
             if not entity.trip_update:
                 continue
-
             route: str = entity.trip_update.trip.route_id
+            status: str = entity.alert.header_text.translation[0].text if entity.alert.header_text.translation else "Normal"
             direction: int = entity.trip_update.trip.direction_id
-
             for stu in entity.trip_update.stop_time_update:
                 if stu.stop_id.startswith(station_prefix):
                     if stu.arrival and stu.arrival.time:
@@ -76,7 +77,8 @@ class NYCTransit:
                         arrivals.append({
                             "time": arr_time,
                             "route": route,
-                            "direction": direction
+                            "direction": direction,
+                            "status": status
                         })
 
         self.pretty_print_subway(arrivals, station_prefix)
@@ -100,7 +102,7 @@ class NYCTransit:
         url: str = f"https://bustime.mta.info/api/siri/vehicle-monitoring.json?key={self.bus_key}&LineRef=MTA%20NYCT_{line.upper()}"
         r = requests.get(url, timeout=10)
         data = r.json()
-
+            
         try:
             vehicles: List[Dict] = (
                 data["Siri"]["ServiceDelivery"]["VehicleMonitoringDelivery"][0]
@@ -114,7 +116,7 @@ class NYCTransit:
             print("🚫 No buses currently active.")
             return
 
-        arrivals: List[Tuple[str, float, float]] = []
+        arrivals: List[Tuple[str, str, float, float]] = []
 
         for v in vehicles:
             mvj = v["MonitoredVehicleJourney"]
@@ -122,7 +124,9 @@ class NYCTransit:
             loc: Dict = mvj.get("VehicleLocation", {})
             lat: float = loc.get("Latitude", 0.0)
             lon: float = loc.get("Longitude", 0.0)
-            arrivals.append((dest, lat, lon))
+            stop: str = data["Siri"]["ServiceDelivery"]["VehicleMonitoringDelivery"][0]["VehicleActivity"][0]["MonitoredVehicleJourney"]["MonitoredCall"]["Extensions"]["Distances"].get("PresentableDistance")
+            bearing: float = mvj.get("Bearing")
+            arrivals.append((dest, stop, lat, lon, bearing))
 
         self.pretty_print_bus(arrivals, line)
 
@@ -163,14 +167,14 @@ class NYCTransit:
             mins: int = int((a["time"] - now).total_seconds() / 60)
             if mins < 0:
                 continue
-
+            status: str = a["status"]
             moon: str = "🌙" if mins <= 2 else "✨" if mins <= 5 else "💖"
             direction: str = "↑" if a["direction"] == 0 else "↓"
-            print(f"   {moon} {mins:2d} min → Line {a['route']} {direction} at {a['time'].strftime('%I:%M %p')}")
+            print(f"   {moon} {mins:2d} min → Line {a['route']} {direction} at {a['time'].strftime('%I:%M %p')} status: {status}")
 
         print("  ---------------------------------------------\n")
 
-    def pretty_print_bus(self, arrivals: List[Tuple[str, float, float]], route: str) -> None:
+    def pretty_print_bus(self, arrivals: List[Tuple[str, str, float, float, float]], route: str) -> None:
         print(f"\n  🚌🌙  LIVE BUS LOCATIONS for {route.upper()}  🌙🚌")
         print("  ---------------------------------------------")
 
@@ -178,8 +182,8 @@ class NYCTransit:
             print("  🚫 No buses found.")
             return
 
-        for dest, lat, lon in arrivals[:6]:
-            print(f"   ✨  → {dest}   ({lat}, {lon})")
+        for dest, stop, lat, lon, bearing in arrivals[:6]:
+            print(f"   ✨  → {dest}   {stop} ({lat}, {lon} {bearing})")
 
         print("  ---------------------------------------------\n")
 
