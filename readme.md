@@ -16,6 +16,7 @@ Each command lives in its own module under `cmds/`, while shared functionality (
 | Command | Description |
 |----------|--------------|
 | `wut` | Dictionary and internal command reference utilities. 🐾 |
+|`nyc` | MTA bus & train tracker|
 | `weather` | NOAA weather updates & predictions ✨ |
 | `sky` | NASA astronomical object feed and space event info. 🌟 |
 | `lights` | Govee smart light controller with preset themes. 🧙‍♀️ |
