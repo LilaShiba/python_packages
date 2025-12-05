@@ -98,7 +98,7 @@ COLOR_PRESETS: Dict[str, Dict[str, Any]] = {
     "smoky_gray": {"r": 120, "g": 120, "b": 130, "effect": "soft"},
     "midnight": {"r": 25, "g": 25, "b": 112, "effect": "fade"},
 
-        # 🌆 Cyberpunk Palette - One-Word Names
+        # 🌆 Cyberpunk Palette 
     "fuchsia": {"r": 255, "g": 20, "b": 147, "effect": "glow"},
     "cyan": {"r": 0, "g": 255, "b": 255, "effect": "sparkle"},
     "violet": {"r": 138, "g": 43, "b": 226, "effect": "pulse"},
