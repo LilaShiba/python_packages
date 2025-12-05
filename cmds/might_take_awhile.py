@@ -31,9 +31,11 @@ FEED_MAP: Dict[str, str] = {
 
 LOCATION_GROUPS: Dict[str, Union[List[str], str]] = {
     "smith": ["F22", "G35"],       # Smith–9th Street
-    "bergen": ["F20", "G33"],      # Bergen St
+    "bergen": ["F20N", "F20S"],      # Bergen St
     "court": ["233", "234"],       # Court St 2/3
-    "atlantic": ["A30", "B26", "D45", "N22", "Q15", "R11"],  # Atlantic Av–Barclays Center
+    "jay":["A41N", "A41S", "R29N", "R29N"],
+    "b-hall":["423N", "423S"],
+    "atlantic": ["235N","235S"],  # Atlantic Av–Barclays Center
     "b63": "bus",
     "b65": "bus",
 }

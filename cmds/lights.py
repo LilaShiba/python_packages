@@ -46,6 +46,8 @@ COLOR_PRESETS: Dict[str, Dict[str, Any]] = {
     "witch": {"r": 150, "g": 80, "b": 200, "effect": "breathe"},
     "moon": {"r": 200, "g": 220, "b": 255, "effect": "glimmer"},
     "borg": {"r": 30, "g": 60, "b": 40, "effect": None},
+    "kilngon": {"r": 155, "g": 17, "b": 30, "effect": "fade"},
+
 
     # ☕ Cozy & cuddle
     "cuddle": {"r": 255, "g": 0, "b": 200, "effect": "warmth"},
@@ -69,6 +71,54 @@ COLOR_PRESETS: Dict[str, Dict[str, Any]] = {
     "sunshine": {"r": 239, "g": 197, "b": 118},  
     "shiba": {"r": 255, "g": 202, "b": 123},
     "lemon": {"r": 255, "g": 250, "b": 150, "effect": "flash"},
+
+    # 🌙 Dreamy & magical shades
+    "lavender_dusk": {"r": 200, "g": 180, "b": 255, "effect": "glow"},
+    "peach_blossom": {"r": 255, "g": 190, "b": 200, "effect": "soft"},
+    "mint_cream": {"r": 245, "g": 255, "b": 240, "effect": "sparkle"},
+    "coral_reef": {"r": 255, "g": 127, "b": 80, "effect": "warmth"},
+    "twilight_blue": {"r": 100, "g": 149, "b": 237, "effect": "fade"},
+    "citrine": {"r": 230, "g": 210, "b": 60, "effect": "flash"},
+    "rose_gold": {"r": 255, "g": 182, "b": 193, "effect": "glow"},
+    "icy_pearl": {"r": 220, "g": 245, "b": 255, "effect": "pulse"},
+    "ember_glow": {"r": 255, "g": 120, "b": 85, "effect": "warmth"},
+    "celestial_teal": {"r": 0, "g": 180, "b": 180, "effect": "sparkle"},
+    "butterscotch": {"r": 255, "g": 200, "b": 100, "effect": "soft"},
+    "frosted_lilac": {"r": 230, "g": 210, "b": 255, "effect": "fade"},
+
+        # 🌈 Expanded Custom Color Palette
+    "sunbeam_yellow": {"r": 255, "g": 245, "b": 130, "effect": "flash"},
+    "tangerine_twist": {"r": 255, "g": 140, "b": 60, "effect": "warmth"},
+    "blush": {"r": 255, "g": 185, "b": 195, "effect": "soft"},
+    "orchid_purple": {"r": 218, "g": 112, "b": 214, "effect": "glow"},
+    "cerulean": {"r": 42, "g": 82, "b": 190, "effect": "sparkle"},
+    "forest_mist": {"r": 85, "g": 140, "b": 110, "effect": "pulse"},
+    "copper_coin": {"r": 184, "g": 115, "b": 51, "effect": "warmth"},
+    "aqua_marine": {"r": 127, "g": 255, "b": 212, "effect": "fade"},
+    "smoky_gray": {"r": 120, "g": 120, "b": 130, "effect": "soft"},
+    "midnight": {"r": 25, "g": 25, "b": 112, "effect": "fade"},
+
+        # 🌆 Cyberpunk Palette - One-Word Names
+    "fuchsia": {"r": 255, "g": 20, "b": 147, "effect": "glow"},
+    "cyan": {"r": 0, "g": 255, "b": 255, "effect": "sparkle"},
+    "violet": {"r": 138, "g": 43, "b": 226, "effect": "pulse"},
+    "lime": {"r": 150, "g": 255, "b": 50, "effect": "flash"},
+    "midnight2": {"r": 48, "g": 25, "b": 52, "effect": "fade"},
+    "teal": {"r": 0, "g": 128, "b": 140, "effect": "glow"},
+    "magenta": {"r": 255, "g": 0, "b": 255, "effect": "pulse"},
+    "chrome": {"r": 200, "g": 200, "b": 210, "effect": "shine"},
+    "plasma": {"r": 255, "g": 85, "b": 0, "effect": "glow"},
+    "ultraviolet": {"r": 72, "g": 0, "b": 120, "effect": "fade"},
+    "neon": {"r": 255, "g": 105, "b": 180, "effect": "sparkle"},
+    "electric": {"r": 0, "g": 150, "b": 255, "effect": "flash"},
+    "rubyteal": {"r": 155, "g": 60, "b": 100, "effect": "glow"},
+    "midnightrose": {"r": 120, "g": 20, "b": 70, "effect": "fade"},   # dark, romantic shadow
+    "amethyst": {"r": 180, "g": 90, "b": 220, "effect": "pulse"},     # rich jewel pop
+    "plasmaglow": {"r": 255, "g": 80, "b": 50, "effect": "glow"},     # electric warmth
+    "emeraldneon": {"r": 0, "g": 180, "b": 130, "effect": "flash"},   # neon-cyber green accent
+
+
+
 }
 
 # ──────────────────────────────────────────────────────────────
